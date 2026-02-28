@@ -1,11 +1,20 @@
-# Fake Robux Generator Scripts (Prank & Education)
+# Fake Robux Generator Scripts
 
-⚠️ This project is for FUN and EDUCATIONAL purposes only.
+⚠️ IMPORTANT  
+Ce projet est FAKE et sert uniquement pour :
+- faire des blagues (prank)
+- montrer que les générateurs de Robux sont faux
+- éduquer contre les arnaques
 
-## Scripts
-- prank.lua : fake console generator prank
-- roblox_gui.lua : Roblox GUI prank button
-- anti_scam.lua : shows that Robux generators are fake
+❌ Aucun script ici ne génère de vrais Robux  
+❌ Aucun mot de passe n’est demandé  
+❌ Aucun lien externe
 
-## Warning
-No Robux are generated. This is only to demonstrate scams and jokes.# -
+## Fichiers
+- prank.lua : faux générateur (blague)
+- roblox_gui.lua : bouton Roblox prank
+- anti_scam.lua : script éducatif
+
+## Disclaimer
+This project does NOT generate Robux.  
+It is only for fun and educational purposes.
