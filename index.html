@@ -105,6 +105,12 @@ footer{
   background:linear-gradient(135deg,#3b82f6,#60a5fa);
   color:white;
 }
+#buyBtn{
+  margin-top:10px;
+  background:linear-gradient(135deg,#f59e0b,#fbbf24);
+  color:black;
+  display:none;
+}
 </style>
 </head>
 
@@ -118,6 +124,7 @@ footer{
   <input id="amount" type="number" placeholder="Montant de Robux">
   <button onclick="generate()">GENERATE</button>
   <button id="shareBtn" onclick="share()">📤 Partager à un ami</button>
+  <button id="buyBtn" onclick="buyRobux()">🛒 Acheter des Robux (officiel)</button>
 
   <div id="captcha">Clique sur <span id="captchaText"></span> pour vérifier</div>
   <div id="progressBox"><div id="bar"></div></div>
@@ -154,6 +161,10 @@ function share(){
   }
 }
 
+function buyRobux(){
+  window.open("https://www.roblox.com/upgrades/robux", "_blank");
+}
+
 function generate(){
   const user=document.getElementById("username").value;
   const amount=document.getElementById("amount").value;
@@ -162,6 +173,7 @@ function generate(){
   const result=document.getElementById("result");
   const captcha=document.getElementById("captcha");
   const captchaText=document.getElementById("captchaText");
+  const buyBtn=document.getElementById("buyBtn");
 
   if(!user||!amount){
     result.innerHTML="❌ Remplis tous les champs.";
@@ -187,7 +199,7 @@ function generate(){
     ];
     let msgIndex=0;
 
-    // 100 étapes x 300ms = ~30 secondes
+    // 100 étapes x 300ms ≈ 30 secondes
     const interval=setInterval(()=>{
       progress+=1;
       bar.style.width=progress+"%";
@@ -198,7 +210,11 @@ function generate(){
 
       if(progress>=100){
         clearInterval(interval);
-        result.innerHTML="😂 BLAGUE !<br>Les générateurs de Robux gratuits n'existent pas.<br>Fais attention aux faux sites.";
+        result.innerHTML=
+          "😂 BLAGUE !<br>" +
+          "Les générateurs de Robux gratuits n'existent pas.<br><br>" +
+          "➡️ Utilise le site officiel pour en acheter.";
+        buyBtn.style.display="block";
       }
     },300);
   }
