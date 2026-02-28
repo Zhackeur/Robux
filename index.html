@@ -6,39 +6,54 @@
 <title>Robux Generator (Simulation)</title>
 <style>
 body {
-  background: linear-gradient(135deg,#0f172a,#020617);
+  background: radial-gradient(circle at top,#052e16,#020617);
   font-family: Arial, sans-serif;
   text-align: center;
-  padding: 50px 10px;
+  padding: 40px 10px;
   color: white;
 }
+.logo {
+  font-size: 26px;
+  font-weight: bold;
+  color: #22c55e;
+  text-shadow: 0 0 10px #22c55e;
+  margin-bottom: 10px;
+}
 .box {
-  background: #1e293b;
+  background: #022c22;
   max-width: 380px;
   margin: auto;
   padding: 25px;
-  border-radius: 15px;
-  box-shadow: 0 0 30px black;
+  border-radius: 18px;
+  box-shadow: 0 0 35px rgba(34,197,94,0.5);
 }
 h2 { margin-bottom: 5px; }
 input, button {
   width: 90%;
   padding: 12px;
   margin-top: 10px;
-  border-radius: 8px;
+  border-radius: 10px;
   border: none;
   font-size: 16px;
 }
+input {
+  background: #064e3b;
+  color: white;
+}
 button {
-  background: #22c55e;
+  background: linear-gradient(135deg,#22c55e,#4ade80);
   font-weight: bold;
   cursor: pointer;
-  transition: transform 0.2s;
+  animation: pulse 2s infinite;
 }
-button:hover { transform: scale(1.05); }
+@keyframes pulse {
+  0% { box-shadow: 0 0 5px #22c55e; }
+  50% { box-shadow: 0 0 20px #22c55e; }
+  100% { box-shadow: 0 0 5px #22c55e; }
+}
 #progressBox {
   width: 100%;
-  background: #334155;
+  background: #064e3b;
   border-radius: 10px;
   margin-top: 15px;
   display: none;
@@ -46,13 +61,14 @@ button:hover { transform: scale(1.05); }
 #bar {
   height: 20px;
   width: 0%;
-  background: #22c55e;
+  background: linear-gradient(90deg,#22c55e,#86efac);
   border-radius: 10px;
+  box-shadow: 0 0 15px #22c55e;
   transition: width 0.3s ease;
 }
 #captcha {
   margin-top: 15px;
-  background: #0f172a;
+  background: #052e16;
   border: 2px dashed #22c55e;
   padding: 10px;
   display: none;
@@ -61,27 +77,30 @@ button:hover { transform: scale(1.05); }
 #captcha span {
   font-weight: bold;
   color: #22c55e;
+  font-size: 20px;
 }
 #result { margin-top: 15px; font-weight: bold; }
 footer {
   margin-top: 20px;
   font-size: 12px;
-  color: #94a3b8;
+  color: #86efac;
 }
 </style>
 </head>
 <body>
 
+<div class="logo">ROBLOX GENERATOR</div>
+
 <div class="box">
   <h2>💰 Robux Generator</h2>
-  <p>Simulation réaliste pour prank & éducation</p>
+  <p>Enter your username and amount</p>
 
   <input type="text" id="username" placeholder="Nom d'utilisateur Roblox">
   <input type="number" id="amount" placeholder="Montant de Robux">
-  <button onclick="generate()">Générer</button>
+  <button onclick="generate()">GENERATE</button>
 
   <div id="captcha">
-    Cliquez sur <span id="captchaText"></span> pour continuer
+    Cliquez sur <span id="captchaText"></span> pour vérifier
   </div>
 
   <div id="progressBox">
@@ -95,8 +114,6 @@ footer {
 ⚠️ Simulation prank & éducative – aucun Robux réel
 </footer>
 
-<audio id="sound" src="https://freesound.org/data/previews/415/415209_5121236-lq.mp3" preload="auto"></audio>
-
 <script>
 function generate() {
   const user = document.getElementById("username").value;
@@ -106,19 +123,17 @@ function generate() {
   const result = document.getElementById("result");
   const captcha = document.getElementById("captcha");
   const captchaText = document.getElementById("captchaText");
-  const sound = document.getElementById("sound");
 
   if (!user || !amount) {
     result.innerHTML = "❌ Remplis tous les champs.";
     return;
   }
 
-  // Affiche faux captcha
   const letters = "ABCDEFGHJKLMNPQRSTUVWXYZ";
   const randomLetter = letters[Math.floor(Math.random()*letters.length)];
   captchaText.textContent = randomLetter;
   captcha.style.display = "block";
-  result.innerHTML = "Veuillez résoudre le captcha...";
+  result.innerHTML = "Vérification humaine requise...";
 
   captcha.onclick = () => {
     captcha.style.display = "none";
@@ -126,7 +141,6 @@ function generate() {
     bar.style.width = "0%";
     let progress = 0;
     result.innerHTML = "Connexion aux serveurs Roblox...";
-    sound.play();
 
     const messages = [
       "Vérification du compte...",
@@ -146,7 +160,6 @@ function generate() {
 
       if(progress >= 100){
         clearInterval(interval);
-        sound.pause();
         result.innerHTML = "😂 C'ÉTAIT UNE BLAGUE<br>❌ Aucun Robux ne peut être généré gratuitement.";
       }
     }, 250);
