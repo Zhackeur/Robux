@@ -3,42 +3,31 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Robux Generator (Simulation)</title>
+<title>Robux Generator</title>
 
 <style>
-/* FOND STYLE ROBLOX */
 body{
-  background:
-    radial-gradient(circle at top, #0b5f2a, #020617),
-    repeating-linear-gradient(45deg, rgba(34,197,94,.08) 0 10px, transparent 10px 20px);
+  background: radial-gradient(circle at top,#0f5132,#020617);
   font-family: Arial, sans-serif;
   text-align:center;
   color:white;
   padding:25px 10px;
 }
-
-/* LOGO STYLE ROBLOX */
 .logo{
-  font-size:32px;
+  font-size:34px;
   font-weight:900;
-  letter-spacing:2px;
   color:#22c55e;
-  text-shadow:
-    0 0 10px #22c55e,
-    0 0 20px #16a34a;
+  text-shadow:0 0 10px #22c55e,0 0 20px #16a34a;
   margin-bottom:10px;
 }
-
-/* BOÎTE PRINCIPALE */
 .box{
-  background:rgba(2,44,34,.9);
+  background:rgba(2,44,34,.95);
   max-width:380px;
   margin:auto;
   padding:25px;
   border-radius:20px;
   box-shadow:0 0 40px rgba(34,197,94,.6);
 }
-
 input,button{
   width:90%;
   padding:12px;
@@ -47,26 +36,18 @@ input,button{
   border:none;
   font-size:16px;
 }
-
-input{
-  background:#064e3b;
-  color:white;
-}
-
+input{background:#064e3b;color:white}
 button{
   background:linear-gradient(135deg,#22c55e,#4ade80);
   font-weight:bold;
   cursor:pointer;
   animation:pulse 2s infinite;
 }
-
 @keyframes pulse{
-  0%{box-shadow:0 0 5px #22c55e;}
-  50%{box-shadow:0 0 25px #22c55e;}
-  100%{box-shadow:0 0 5px #22c55e;}
+  0%{box-shadow:0 0 5px #22c55e}
+  50%{box-shadow:0 0 25px #22c55e}
+  100%{box-shadow:0 0 5px #22c55e}
 }
-
-/* BARRE DE CHARGEMENT */
 #progressBox{
   width:100%;
   background:#064e3b;
@@ -82,8 +63,6 @@ button{
   box-shadow:0 0 15px #22c55e;
   transition:width .3s;
 }
-
-/* CAPTCHA */
 #captcha{
   margin-top:15px;
   background:#052e16;
@@ -97,16 +76,7 @@ button{
   color:#22c55e;
   font-size:20px;
 }
-
-#result{margin-top:15px;font-weight:bold;}
-
-footer{
-  margin-top:15px;
-  font-size:12px;
-  color:#86efac;
-}
-
-/* BLOC FAUX GAGNANTS */
+#result{margin-top:15px;font-weight:bold}
 #winners{
   margin-top:20px;
   background:rgba(2,44,34,.8);
@@ -115,74 +85,43 @@ footer{
   box-shadow:0 0 20px rgba(34,197,94,.4);
   font-size:14px;
 }
-#winners span{
-  color:#4ade80;
-  font-weight:bold;
-}
-
-/* PAGE WARNING */
-#warning{
-  position:fixed;
-  top:0;left:0;right:0;bottom:0;
-  background:rgba(2,6,23,.95);
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  z-index:10;
-}
-#warningBox{
-  background:#022c22;
-  padding:25px;
-  border-radius:15px;
-  max-width:340px;
-  box-shadow:0 0 25px #22c55e;
+#winners span{color:#4ade80;font-weight:bold}
+footer{
+  margin-top:15px;
+  font-size:12px;
+  color:#86efac;
 }
 </style>
 </head>
 
 <body>
 
-<!-- AVERTISSEMENT -->
-<div id="warning">
-  <div id="warningBox">
-    <h3>⚠️ AVERTISSEMENT</h3>
-    <p>Ce site est une <b>simulation</b>.</p>
-    <p>Aucun Robux réel ne sera généré.</p>
-    <button onclick="closeWarning()">J'ai compris</button>
-  </div>
-</div>
-
 <div class="logo">ROBLOX GENERATOR</div>
 
 <div class="box">
   <h2>💰 Robux Generator</h2>
-
   <input id="username" placeholder="Nom d'utilisateur Roblox">
   <input id="amount" type="number" placeholder="Montant de Robux">
   <button onclick="generate()">GENERATE</button>
 
   <div id="captcha">Clique sur <span id="captchaText"></span> pour vérifier</div>
-
   <div id="progressBox"><div id="bar"></div></div>
   <div id="result"></div>
 </div>
 
-<!-- FAUX GAGNANTS -->
 <div id="winners">
   🎉 <span id="winnerName">AlexPro</span> vient de gagner <span id="winnerAmount">500</span> Robux !
 </div>
 
 <footer>
-⚠️ Simulation prank & éducative – aucun Robux réel
+Simulation visuelle
 </footer>
 
-<script>
-function closeWarning(){
-  document.getElementById("warning").style.display="none";
-}
+<audio id="loadSound" src="https://cdn.pixabay.com/audio/2022/03/15/audio_3f8b5d3d3a.mp3"></audio>
+<audio id="winSound" src="https://cdn.pixabay.com/audio/2022/03/15/audio_1c2d4b0e3a.mp3"></audio>
 
-/* LISTE DE NOMS FAKE */
-const names=["AlexPro","Noob123","DarkPlayer","LunaGirl","MegaBoy","XxPlayerxX","RobloxFan","ShadowKid"];
+<script>
+const names=["AlexPro","Noob123","DarkPlayer","LunaGirl","MegaBoy","ShadowKid","XxPlayerxX"];
 const amounts=[100,250,500,1000,2000];
 
 setInterval(()=>{
@@ -190,6 +129,7 @@ setInterval(()=>{
   const a=amounts[Math.floor(Math.random()*amounts.length)];
   document.getElementById("winnerName").textContent=n;
   document.getElementById("winnerAmount").textContent=a;
+  document.getElementById("winSound").play();
 },3000);
 
 function generate(){
@@ -200,6 +140,7 @@ function generate(){
   const result=document.getElementById("result");
   const captcha=document.getElementById("captcha");
   const captchaText=document.getElementById("captchaText");
+  const sound=document.getElementById("loadSound");
 
   if(!user||!amount){
     result.innerHTML="❌ Remplis tous les champs.";
@@ -216,9 +157,10 @@ function generate(){
     box.style.display="block";
     bar.style.width="0%";
     let progress=0;
-    result.innerHTML="Connexion aux serveurs Roblox...";
+    sound.play();
 
     const messages=[
+      "Connexion aux serveurs Roblox...",
       "Vérification du compte...",
       "Analyse de sécurité...",
       "Génération de "+amount+" Robux pour "+user+"..."
@@ -228,14 +170,13 @@ function generate(){
     const interval=setInterval(()=>{
       progress+=5;
       bar.style.width=progress+"%";
-
       if(progress%20===0 && msgIndex<messages.length){
         result.innerHTML=messages[msgIndex++];
       }
-
       if(progress>=100){
         clearInterval(interval);
-        result.innerHTML="😂 C'ÉTAIT UNE BLAGUE<br>❌ Aucun Robux ne peut être généré gratuitement.";
+        sound.pause();
+        result.innerHTML="😂 BLAGUE !<br>Les générateurs de Robux gratuits n'existent pas.<br>Fais attention aux faux sites.";
       }
     },250);
   }
